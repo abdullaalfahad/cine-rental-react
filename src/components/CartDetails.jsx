@@ -5,7 +5,11 @@ import checkoutIcon from "../assets/icons/checkout.svg";
 import { getImgUrl } from "../utils/cine-utils";
 
 export default function CartDetails({ onClose }) {
-  const { cart } = useContext(MovieContext);
+  const { cart, dispatch } = useContext(MovieContext);
+
+  const handleRemoveCart = (movie) => {
+    dispatch({ type: "REMOVE_FROM_CART", payload: movie });
+  };
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
@@ -14,6 +18,11 @@ export default function CartDetails({ onClose }) {
           <h2 className="text-2xl lg:text-[30px] mb-10 font-bold">
             Your Carts
           </h2>
+          {cart.length === 0 && (
+            <div className="text-center py-10">
+              <p className="text-lg">Your cart is empty</p>
+            </div>
+          )}
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
             {cart.map((item) => (
               <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
@@ -34,7 +43,10 @@ export default function CartDetails({ onClose }) {
                   </div>
                 </div>
                 <div className="flex justify-between gap-4 items-center">
-                  <button className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white">
+                  <button
+                    onClick={() => handleRemoveCart(item)}
+                    className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
+                  >
                     <img className="w-5 h-5" src={deleteIcon} alt="" />
                     <span className="max-md:hidden">Remove</span>
                   </button>
