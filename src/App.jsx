@@ -1,19 +1,15 @@
-import Header from "./components/Header";
-import MovieList from "./components/MovieList";
-import Sidebar from "./components/Sidebar";
+import { useReducer } from "react";
+import { MovieContext } from "./context";
+import Page from "./Page";
+import { cartData, cartReducer } from "./reducer/cartReducer";
 
 function App() {
-  return (
-    <>
-      <Header />
-      <main>
-        <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-          <Sidebar />
+  const [cart, dispatch] = useReducer(cartReducer, cartData);
 
-          <MovieList />
-        </div>
-      </main>
-    </>
+  return (
+    <MovieContext.Provider value={{ cart, dispatch }}>
+      <Page />
+    </MovieContext.Provider>
   );
 }
 

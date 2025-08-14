@@ -5,12 +5,15 @@ import sun from "../assets/icons/sun.svg";
 import shoppingCart from "../assets/shopping-cart.svg";
 import { useState } from "react";
 import CartDetails from "./CartDetails";
+import { useContext } from "react";
+import { MovieContext } from "../context";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cart } = useContext(MovieContext);
 
   return (
-    <header className="container mx-auto">
+    <header>
       {isModalOpen && <CartDetails onClose={() => setIsModalOpen(false)} />}
 
       <nav className="container flex items-center justify-between space-x-10 py-6">
@@ -39,6 +42,11 @@ export default function Header() {
               href="#"
               onClick={() => setIsModalOpen(true)}
             >
+              {cart.length > 0 && (
+                <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                  {cart.length}
+                </span>
+              )}
               <img
                 src={shoppingCart}
                 width="24"
