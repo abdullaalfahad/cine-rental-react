@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import MovieList from "./components/MovieList";
 import Sidebar from "./components/Sidebar";
 import { ThemeContext } from "./context";
+import { ToastContainer } from "react-toastify";
 
 export default function Page() {
   const { darkMode } = useContext(ThemeContext);
@@ -17,6 +18,8 @@ export default function Page() {
           <MovieList />
         </div>
       </main>
+
+      <ToastContainer />
     </div>
   );
 }

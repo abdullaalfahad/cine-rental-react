@@ -5,6 +5,7 @@ import { useState } from "react";
 import MovieDetailsModal from "./MovieDetailsModal";
 import { useContext } from "react";
 import { MovieContext } from "../context";
+import { toast } from "react-toastify";
 
 export default function MovieCard({ movie }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,8 +30,9 @@ export default function MovieCard({ movie }) {
 
     if (!existingItem) {
       dispatch({ type: "ADD_TO_CART", payload: movie });
+      toast.success("Movie added to cart");
     } else {
-      alert("Movie is already in the cart");
+      toast.error("Movie is already in the cart");
     }
   };
 
