@@ -1,19 +1,21 @@
-import React from "react";
 import logo from "../assets/logo.svg";
 import ring from "../assets/ring.svg";
 import sun from "../assets/icons/sun.svg";
+import moon from "../assets/icons/moon.svg";
 import shoppingCart from "../assets/shopping-cart.svg";
 import { useState } from "react";
 import CartDetails from "./CartDetails";
 import { useContext } from "react";
-import { MovieContext } from "../context";
+import { MovieContext, ThemeContext } from "../context";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { cart } = useContext(MovieContext);
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   return (
-    <header>
+    <header className="w-[95%] mx-auto">
       {isModalOpen && <CartDetails onClose={() => setIsModalOpen(false)} />}
 
       <nav className="container flex items-center justify-between space-x-10 py-6">
@@ -32,8 +34,14 @@ export default function Header() {
             <a
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
               href="#"
+              onClick={() => setDarkMode(!darkMode)}
             >
-              <img src={sun} width="24" height="24" alt="sun" />
+              <img
+                src={darkMode ? sun : moon}
+                width="24"
+                height="24"
+                alt="sun"
+              />
             </a>
           </li>
           <li>
