@@ -5,7 +5,7 @@ import { cartData, cartReducer } from "./reducer/cartReducer";
 import { useState } from "react";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [cart, dispatch] = useReducer(cartReducer, cartData);
 
   return (
